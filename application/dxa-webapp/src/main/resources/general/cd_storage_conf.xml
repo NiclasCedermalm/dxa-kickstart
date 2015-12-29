@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Configuration Version="7.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schemas/cd_storage_conf.xsd">
+    <Global>
+        <ObjectCache Enabled="false">
+            <Policy Type="LRU" Class="com.tridion.cache.LRUPolicy">
+                <Param Name="MemSize" Value="16mb" />
+            </Policy>
+            <Features>
+                <Feature Type="DependencyTracker" Class="com.tridion.cache.DependencyTracker" />
+            </Features>
+
+        </ObjectCache>
+        <Storages>
+            <StorageBindings>
+                <Bundle src="preview_dao_bundle.xml" />
+            </StorageBindings>
+            <Wrappers>
+                <Wrapper Name="SessionWrapper">
+                    <Storage Type="persistence" Class="com.tridion.storage.persistence.JPADAOFactory" dialect="HSQL" Id="sessionDb" Url="jdbc:hsqldb:${dxa.dbPath}/preview-db/session_preview" Username="sa" Password="" Driver="org.hsqldb.jdbcDriver">
+                        <Pool Type="jdbc2" Size="10" MonitorInterval="60" IdleTimeout="120" CheckoutTimeout="120"/>
+                    </Storage>
+                </Wrapper>
+            </Wrappers>
+            <Storage Type="persistence" Class="com.tridion.storage.persistence.JPADAOFactory" dialect="HSQL" Id="defaultdb" Url="jdbc:hsqldb:${dxa.dbPath}/content-db/content-db" Username="sa" Password="" Driver="org.hsqldb.jdbcDriver">
+                <Pool Type="jdbc2" Size="10" MonitorInterval="60" IdleTimeout="120" CheckoutTimeout="120"/>
+            </Storage>
+
+            <!-- File based storages for binaries -->
+            <Storage Id="defaultFile" Class="com.tridion.storage.filesystem.FSDAOFactory" Type="filesystem" defaultFilesystem="false">
+                <Root Path="${dxa.dbPath}/file-storage" />
+            </Storage>
+            <Storage Type="filesystem" Class="com.tridion.storage.filesystem.FSDAOFactory" Id="defaultDataFile" defaultFilesystem="true" defaultStorage="true">
+                <Root Path="${dxa.dbPath}/file-storage/data" />
+            </Storage>
+
+        </Storages>
+    </Global>
+    <ItemTypes defaultStorageId="defaultdb" cached="false">
+        <Item cached="true" typeMapping="Page" storageId="defaultFile"/>
+        <Item cached="true" typeMapping="Binary" storageId="defaultFile"/>
+    </ItemTypes>
+
+    <License Location="${dxa.licensePath}"/>
+</Configuration>

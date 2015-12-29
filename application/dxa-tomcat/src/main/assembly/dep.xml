@@ -1,0 +1,42 @@
+<assembly>
+    <id>bin</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <fileSets>
+        <fileSet>
+            <directory>${project.build.directory}/apache-tomcat-${tomcat-version}</directory>
+            <excludes>
+                <exclude>bin/startup.bat</exclude>
+                <exclude>bin/shutdown.bat</exclude>
+                <exclude>conf/server.xml</exclude>
+            </excludes>
+            <outputDirectory></outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/assembly/tomcat</directory>
+            <outputDirectory></outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+            <filtered>true</filtered>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/assembly/db</directory>
+            <outputDirectory>db</outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+    <files>
+        <file>
+            <source>${project.build.directory}/deps/dxa-webapp-${project.version}.war</source>
+            <outputDirectory>webapps</outputDirectory>
+            <destName>ROOT.war</destName>
+        </file>
+    </files>
+
+</assembly>
