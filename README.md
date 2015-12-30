@@ -15,11 +15,15 @@ To install DXA you need to do the following steps:
 
 ### Step 1: Prepare environment
 
-Create a DXA directory somewhere on your computer. In there create a 'code'-directory. Copy the env.properties.sample to env.properties and set the 'dxa.home'property to your created DXA directory.
-Clone this repository in your [dxa.home]/code directory:
+Create a DXA directory somewhere on your computer. In there create a 'code'-directory. Clone this repository in your [dxa.home]/code directory:
 
 
     dxa/code> git clone https://github.com/NiclasCedermalm/dxa-kickstart
+    
+Copy the env.properties.sample to env.properties. Open the file in an editor and edit the following properties:
+
+* 'dxa.home' - path to your created DXA directory
+* 'dxa.licensePath' - path to your cd_license.xml file 
 
 ### Step 2: Install DXA code
     
@@ -45,7 +49,7 @@ Verify so the DXA publications have been created in Tridion.
 
 ### Step 3: Install Tomcat
 
-Modify the env.properties file and update the publication ID to match the newly created publication '400 Example Site'. Run the following command to install a complete DXA.Java distribution including Tomcat and embedded Broker DB:
+Modify the env.properties file and update the publication ID property (dxa.publicationId) to match the newly created publication '400 Example Site'. Run the following command to install a complete DXA.Java distribution including Tomcat and embedded Broker DB:
 
 
      dxa/code/dxa-kickstart> mvn install -Ptomcat 
@@ -69,6 +73,8 @@ To setup DXA development environment in an IDE such as Intellij IDEA or Eclipse 
 
 1. Import the dxa-web-application-java (optional) & dxa-kickstart maven projects into the IDE
 2. Create a Tomcat configuration and point to the Tomcat instance in the 'dxa-tomcat'-directory 
+3. Add the dxa-webapp to the Tomcat configuration
+4. Run the server within the IDE
 
 
 ## To enable addon modules
