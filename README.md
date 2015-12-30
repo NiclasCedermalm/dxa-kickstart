@@ -2,12 +2,15 @@ DXA Kickstart Environment
 ===================================================
 
 This is bundled kickstart environment for the Digital Experience Accelerator (DXA) for Java.
-It contains the following:
+The kickstart environment is a bundled “all-in-one” environment containing the following: 
 
 * Tomcat 8.x
-* DXA.Java
-* OData Preview Web Service
-* Tridion Deployer Service
+* DXA.Java web application with all needed configuration
+* OData Preview web service
+* SDL Tridion Deployer service
+* Hypersonic in-memory broker database 
+ 
+Note: SDL does not support Hypersonic as content delivery database, so do not use this in a production setup. It should only be used for development and test purposes. 
 
 ## Install the DXA kickstart environment
 
@@ -47,7 +50,7 @@ Run the script again to install the DXA standard roles:
 Verify so the DXA publications have been created in Tridion.
 
 
-### Step 3: Install Tomcat
+### Step 4: Install Tomcat
 
 Modify the env.properties file and update the publication ID property (dxa.publicationId) to match the newly created publication '400 Example Site'. Run the following command to install a complete DXA.Java distribution including Tomcat and embedded Broker DB:
 
@@ -56,7 +59,7 @@ Modify the env.properties file and update the publication ID property (dxa.publi
       
 Start the Tomcat server by go into the 'dxa-tomcat\bin' directory and start 'startup.bat' alt. 'startup.sh'. Wait for the server start up. Verify the installation by go the following URL in a browser: http://[DXA_HOST - for example localhost]:8080/cd_upload/httpupload 
 
-### Step 4: Publish Example Site
+### Step 5: Publish Example Site
 
 Create a new publication target in Tridion & publish out the DXA example site using the following instructions: http://docs.sdl.com/LiveContent/content/en-US/SDL%20DXA-v2/GUID-267CDBBF-723A-4633-8C17-9F02EAE1EC96.
 Use the following data when setting up the publication target: 
