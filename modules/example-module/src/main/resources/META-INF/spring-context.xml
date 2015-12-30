@@ -11,8 +11,10 @@
     <context:component-scan base-package="com.example.module"/>
 
     <!--  Alternative way of registering the semantic classes -->
+    <!--
     <bean class="com.sdl.webapp.common.api.mapping.RegisterSemanticClasses">
         <property name="namespace" value="com.example.module.model"/>
     </bean>
+    -->
 
 </beans>
